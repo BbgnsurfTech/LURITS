@@ -10,16 +10,47 @@ use App\Team;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Yajra\DataTables\Facades\DataTables;
 
 class TeamController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        abort_if(Gate::denies('team_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        if ($request->ajax()) {
+            $query = Team::with(['team'])->select(sprintf('%s.*', (new Team)->table));
+            $table = Datatables::of($query);
 
-        $teams = Team::all();
+            $table->addColumn('placeholder', '&nbsp;');
+            $table->addColumn('actions', '&nbsp;');
 
-        return view('admin.teams.index', compact('teams'));
+            $table->editColumn('actions', function ($row) {
+                $viewGate      = 'team_show';
+                $editGate      = 'team_edit';
+                $deleteGate    = 'team_delete';
+                $crudRoutePart = 'teams';
+
+                return view('partials.datatablesActions', compact(
+                    'viewGate',
+                    'editGate',
+                    'deleteGate',
+                    'crudRoutePart',
+                    'row'
+                ));
+            });
+
+            $table->editColumn('id', function ($row) {
+                return $row->id ? $row->id : "";
+            });
+            $table->editColumn('name', function ($row) {
+                return $row->name ? $row->name : "";
+            });
+
+            $table->rawColumns(['actions', 'placeholder']);
+
+            return $table->make(true);
+        }
+
+        return view('admin.teams.index');
     }
 
     public function create()
@@ -40,6 +71,8 @@ class TeamController extends Controller
     {
         abort_if(Gate::denies('team_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $team->load('team');
+
         return view('admin.teams.edit', compact('team'));
     }
 
@@ -54,7 +87,7 @@ class TeamController extends Controller
     {
         abort_if(Gate::denies('team_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $team->load('teamUsers');
+        $team->load('team', 'teamUsers', 'teamTeams');
 
         return view('admin.teams.show', compact('team'));
     }

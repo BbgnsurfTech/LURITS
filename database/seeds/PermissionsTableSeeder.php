@@ -92,6 +92,34 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '21',
                 'title' => 'team_access',
             ],
+            [
+                'id'    => '22',
+                'title' => 'school_management_access',
+            ],
+            [
+                'id'    => '23',
+                'title' => 'records_management_access',
+            ],
+            [
+                'id'    => '24',
+                'title' => 'student_admission_create',
+            ],
+            [
+                'id'    => '25',
+                'title' => 'student_admission_edit',
+            ],
+            [
+                'id'    => '26',
+                'title' => 'student_admission_show',
+            ],
+            [
+                'id'    => '27',
+                'title' => 'student_admission_delete',
+            ],
+            [
+                'id'    => '28',
+                'title' => 'student_admission_access',
+            ],
         ];
 
         Permission::insert($permissions);

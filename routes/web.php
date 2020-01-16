@@ -29,4 +29,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Teams
     Route::delete('teams/destroy', 'TeamController@massDestroy')->name('teams.massDestroy');
     Route::resource('teams', 'TeamController');
+
+    // Records Managements
+    Route::resource('records-managements', 'RecordsManagementController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Student Admissions
+    Route::delete('student-admissions/destroy', 'StudentAdmissionController@massDestroy')->name('student-admissions.massDestroy');
+    Route::resource('student-admissions', 'StudentAdmissionController');
 });
