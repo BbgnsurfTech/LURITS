@@ -35,5 +35,26 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Student Admissions
     Route::delete('student-admissions/destroy', 'StudentAdmissionController@massDestroy')->name('student-admissions.massDestroy');
+    Route::post('student-admissions/media', 'StudentAdmissionController@storeMedia')->name('student-admissions.storeMedia');
+    Route::post('student-admissions/ckmedia', 'StudentAdmissionController@storeCKEditorImages')->name('student-admissions.storeCKEditorImages');
     Route::resource('student-admissions', 'StudentAdmissionController');
+
+    // Attendances
+    Route::delete('attendances/destroy', 'AttendanceController@massDestroy')->name('attendances.massDestroy');
+    Route::resource('attendances', 'AttendanceController');
+
+    // Teachers
+    Route::delete('teachers/destroy', 'TeachersController@massDestroy')->name('teachers.massDestroy');
+    Route::resource('teachers', 'TeachersController');
+
+    // Teacher Attendances
+    Route::delete('teacher-attendances/destroy', 'TeacherAttendanceController@massDestroy')->name('teacher-attendances.massDestroy');
+    Route::resource('teacher-attendances', 'TeacherAttendanceController');
+
+    // Class Time Tables
+    Route::resource('class-time-tables', 'ClassTimeTableController', ['except' => ['create', 'store', 'edit', 'update', 'show', 'destroy']]);
+
+    // Parent Guardianregisters
+    Route::delete('parent-guardianregisters/destroy', 'ParentGuardianregisterController@massDestroy')->name('parent-guardianregisters.massDestroy');
+    Route::resource('parent-guardianregisters', 'ParentGuardianregisterController');
 });

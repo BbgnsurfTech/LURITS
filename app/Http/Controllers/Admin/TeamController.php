@@ -38,11 +38,23 @@ class TeamController extends Controller
                 ));
             });
 
-            $table->editColumn('id', function ($row) {
-                return $row->id ? $row->id : "";
-            });
             $table->editColumn('name', function ($row) {
                 return $row->name ? $row->name : "";
+            });
+            $table->editColumn('pseudo_code', function ($row) {
+                return $row->pseudo_code ? $row->pseudo_code : "";
+            });
+            $table->editColumn('nemis_code', function ($row) {
+                return $row->nemis_code ? $row->nemis_code : "";
+            });
+            $table->editColumn('school_community', function ($row) {
+                return $row->school_community ? $row->school_community : "";
+            });
+            $table->editColumn('village_town', function ($row) {
+                return $row->village_town ? $row->village_town : "";
+            });
+            $table->editColumn('code_type_sector', function ($row) {
+                return $row->code_type_sector ? Team::CODE_TYPE_SECTOR_SELECT[$row->code_type_sector] : '';
             });
 
             $table->rawColumns(['actions', 'placeholder']);
@@ -87,7 +99,7 @@ class TeamController extends Controller
     {
         abort_if(Gate::denies('team_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $team->load('team', 'teamUsers', 'teamTeams');
+        $team->load('team', 'teamUsers', 'teamTeams', 'schoolEnrolledStudentAdmissions', 'teamAttendances', 'teamTeachers', 'teamTeacherAttendances', 'teamParentGuardianregisters');
 
         return view('admin.teams.show', compact('team'));
     }

@@ -120,6 +120,94 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '28',
                 'title' => 'student_admission_access',
             ],
+            [
+                'id'    => '29',
+                'title' => 'attendance_create',
+            ],
+            [
+                'id'    => '30',
+                'title' => 'attendance_edit',
+            ],
+            [
+                'id'    => '31',
+                'title' => 'attendance_show',
+            ],
+            [
+                'id'    => '32',
+                'title' => 'attendance_delete',
+            ],
+            [
+                'id'    => '33',
+                'title' => 'attendance_access',
+            ],
+            [
+                'id'    => '34',
+                'title' => 'teacher_create',
+            ],
+            [
+                'id'    => '35',
+                'title' => 'teacher_edit',
+            ],
+            [
+                'id'    => '36',
+                'title' => 'teacher_show',
+            ],
+            [
+                'id'    => '37',
+                'title' => 'teacher_delete',
+            ],
+            [
+                'id'    => '38',
+                'title' => 'teacher_access',
+            ],
+            [
+                'id'    => '39',
+                'title' => 'teacher_attendance_create',
+            ],
+            [
+                'id'    => '40',
+                'title' => 'teacher_attendance_edit',
+            ],
+            [
+                'id'    => '41',
+                'title' => 'teacher_attendance_show',
+            ],
+            [
+                'id'    => '42',
+                'title' => 'teacher_attendance_delete',
+            ],
+            [
+                'id'    => '43',
+                'title' => 'teacher_attendance_access',
+            ],
+            [
+                'id'    => '44',
+                'title' => 'class_time_table_access',
+            ],
+            [
+                'id'    => '45',
+                'title' => 'parent_guardian_access',
+            ],
+            [
+                'id'    => '46',
+                'title' => 'parent_guardianregister_create',
+            ],
+            [
+                'id'    => '47',
+                'title' => 'parent_guardianregister_edit',
+            ],
+            [
+                'id'    => '48',
+                'title' => 'parent_guardianregister_show',
+            ],
+            [
+                'id'    => '49',
+                'title' => 'parent_guardianregister_delete',
+            ],
+            [
+                'id'    => '50',
+                'title' => 'parent_guardianregister_access',
+            ],
         ];
 
         Permission::insert($permissions);

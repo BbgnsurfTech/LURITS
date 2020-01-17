@@ -19,8 +19,40 @@ class UpdateTeamRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'name'               => [
                 'required',
+            ],
+            'pseudo_code'        => [
+                'max:10',
+            ],
+            'nemis_code'         => [
+                'max:10',
+            ],
+            'number_and_street'  => [
+                'max:100',
+            ],
+            'school_community'   => [
+                'min:5',
+                'max:100',
+            ],
+            'village_town'       => [
+                'min:5',
+                'max:50',
+            ],
+            'email_address'      => [
+                'max:50',
+            ],
+            'school_telephone'   => [
+                'max:11',
+            ],
+            'code_type_sector'   => [
+                'required',
+            ],
+            'ward'               => [
+                'max:50',
+            ],
+            'nearby_name_school' => [
+                'max:100',
             ],
         ];
     }
