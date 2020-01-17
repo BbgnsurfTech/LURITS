@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 @can('user_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }} {{ request()->is('admin/teams*') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }}">
                         <a class="nav-link nav-dropdown-toggle" href="#">
                             <i class="fa-fw fas fa-users">
 
@@ -69,10 +69,25 @@
                                     </a>
                                 </li>
                             @endcan
+                        </ul>
+                    </li>
+                @endcan
+                @can('school_management_access')
+                    <li class="nav-item has-treeview {{ request()->is('admin/teams*') ? 'menu-open' : '' }} {{ request()->is('admin/student-admissions*') ? 'menu-open' : '' }}">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="fa-fw fas fa-school">
+
+                            </i>
+                            <p>
+                                <span>{{ trans('cruds.schoolManagement.title') }}</span>
+                                <i class="right fa fa-fw fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
                             @can('team_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.teams.index") }}" class="nav-link {{ request()->is('admin/teams') || request()->is('admin/teams/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-users">
+                                        <i class="fa-fw fas fa-school">
 
                                         </i>
                                         <p>
@@ -81,7 +96,31 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('student_admission_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.student-admissions.index") }}" class="nav-link {{ request()->is('admin/student-admissions') || request()->is('admin/student-admissions/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-file-alt">
+
+                                        </i>
+                                        <p>
+                                            <span>{{ trans('cruds.studentAdmission.title') }}</span>
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                         </ul>
+                    </li>
+                @endcan
+                @can('records_management_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.records-managements.index") }}" class="nav-link {{ request()->is('admin/records-managements') || request()->is('admin/records-managements/*') ? 'active' : '' }}">
+                            <i class="fa-fw fas fa-book">
+
+                            </i>
+                            <p>
+                                <span>{{ trans('cruds.recordsManagement.title') }}</span>
+                            </p>
+                        </a>
                     </li>
                 @endcan
                 <li class="nav-item">

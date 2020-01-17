@@ -12,4 +12,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
     // Teams
     Route::apiResource('teams', 'TeamApiController');
+
+    // Student Admissions
+    Route::apiResource('student-admissions', 'StudentAdmissionApiController');
 });

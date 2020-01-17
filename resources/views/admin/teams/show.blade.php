@@ -31,6 +31,14 @@
                             {{ $team->name }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.team.fields.team') }}
+                        </th>
+                        <td>
+                            {{ $team->team->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -52,10 +60,18 @@
                 {{ trans('cruds.user.title') }}
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#team_teams" role="tab" data-toggle="tab">
+                {{ trans('cruds.team.title') }}
+            </a>
+        </li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane" role="tabpanel" id="team_users">
             @includeIf('admin.teams.relationships.teamUsers', ['users' => $team->teamUsers])
+        </div>
+        <div class="tab-pane" role="tabpanel" id="team_teams">
+            @includeIf('admin.teams.relationships.teamTeams', ['teams' => $team->teamTeams])
         </div>
     </div>
 </div>
