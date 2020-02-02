@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route("admin.student-admissions.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.studentAdmission.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'StudentAdmission', 'route' => 'admin.student-admissions.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -23,10 +27,46 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.studentAdmission.fields.id') }}
+                            {{ trans('cruds.studentAdmission.fields.child_name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.studentAdmission.fields.child_name') }}
+                            {{ trans('cruds.studentAdmission.fields.middle_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.last_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.admission') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.gender') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.state_origin') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.nationality_1') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.hubby') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.student_picture') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.student_document') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.school_enrolled') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.studentAdmission.fields.parent_guardian') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.parentGuardianregister.fields.middle_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.parentGuardianregister.fields.last_name') }}
                         </th>
                         <th>
                             &nbsp;
@@ -40,10 +80,54 @@
 
                             </td>
                             <td>
-                                {{ $studentAdmission->id ?? '' }}
+                                {{ $studentAdmission->child_name ?? '' }}
                             </td>
                             <td>
-                                {{ $studentAdmission->child_name ?? '' }}
+                                {{ $studentAdmission->middle_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $studentAdmission->last_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $studentAdmission->admission ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\StudentAdmission::GENDER_SELECT[$studentAdmission->gender] ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\StudentAdmission::STATE_ORIGIN_SELECT[$studentAdmission->state_origin] ?? '' }}
+                            </td>
+                            <td>
+                                {{ App\StudentAdmission::NATIONALITY_1_SELECT[$studentAdmission->nationality_1] ?? '' }}
+                            </td>
+                            <td>
+                                {{ $studentAdmission->hubby ?? '' }}
+                            </td>
+                            <td>
+                                @if($studentAdmission->student_picture)
+                                    <a href="{{ $studentAdmission->student_picture->getUrl() }}" target="_blank">
+                                        <img src="{{ $studentAdmission->student_picture->getUrl('thumb') }}" width="50px" height="50px">
+                                    </a>
+                                @endif
+                            </td>
+                            <td>
+                                @foreach($studentAdmission->student_document as $key => $media)
+                                    <a href="{{ $media->getUrl() }}" target="_blank">
+                                        {{ trans('global.view_file') }}
+                                    </a>
+                                @endforeach
+                            </td>
+                            <td>
+                                {{ $studentAdmission->school_enrolled->name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $studentAdmission->parent_guardian->first_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $studentAdmission->parent_guardian->middle_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $studentAdmission->parent_guardian->last_name ?? '' }}
                             </td>
                             <td>
                                 @can('student_admission_show')
@@ -116,7 +200,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 50,
   });
   $('.datatable-StudentAdmission:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

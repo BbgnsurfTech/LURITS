@@ -234,7 +234,7 @@ return [
     'transaction_date'                     => 'Date de la transaction',
     'trash'                                => 'Corbeille',
     'update'                               => 'Mettre à jour',
-    'updated_at'                           => 'Modifier dès',
+    'updated_at'                           => 'Modifié le',
     'upgrade_to_premium'                   => 'Passer à la version premium',
     'user_actions'                         => 'Actions de l\'utilisateur',
     'valid_from'                           => 'Valide à partir du',

@@ -29,7 +29,16 @@
                             {{ trans('cruds.user.fields.name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.user.fields.middle_name') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.last_name') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.user.fields.email') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.user.fields.profile_img') }}
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.email_verified_at') }}
@@ -55,7 +64,20 @@
                                 {{ $user->name ?? '' }}
                             </td>
                             <td>
+                                {{ $user->middle_name ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->last_name ?? '' }}
+                            </td>
+                            <td>
                                 {{ $user->email ?? '' }}
+                            </td>
+                            <td>
+                                @if($user->profile_img)
+                                    <a href="{{ $user->profile_img->getUrl() }}" target="_blank">
+                                        <img src="{{ $user->profile_img->getUrl('thumb') }}" width="50px" height="50px">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 {{ $user->email_verified_at ?? '' }}
@@ -136,7 +158,7 @@
 
   $.extend(true, $.fn.dataTable.defaults, {
     order: [[ 1, 'desc' ]],
-    pageLength: 100,
+    pageLength: 10,
   });
   $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){

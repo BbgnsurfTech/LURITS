@@ -10,12 +10,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use SoftDeletes, Notifiable, HasApiTokens;
+    use SoftDeletes, Notifiable, HasApiTokens, HasMediaTrait;
 
     public $table = 'users';
+
+    protected $appends = [
+        'profile_img',
+    ];
 
     protected $hidden = [
         'password',
@@ -34,9 +41,11 @@ class User extends Authenticatable
         'email',
         'team_id',
         'password',
+        'last_name',
         'created_at',
         'updated_at',
         'deleted_at',
+        'middle_name',
         'remember_token',
         'email_verified_at',
     ];
@@ -44,6 +53,38 @@ class User extends Authenticatable
     public function getIsAdminAttribute()
     {
         return $this->roles()->where('id', 1)->exists();
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')->width(50)->height(50);
+    }
+
+    public function assignedToTasks()
+    {
+        return $this->hasMany(Task::class, 'assigned_to_id', 'id');
+    }
+
+    public function assignedToAssets()
+    {
+        return $this->hasMany(Asset::class, 'assigned_to_id', 'id');
+    }
+
+    public function assignedUserAssetsHistories()
+    {
+        return $this->hasMany(AssetsHistory::class, 'assigned_user_id', 'id');
+    }
+
+    public function getProfileImgAttribute()
+    {
+        $file = $this->getMedia('profile_img')->last();
+
+        if ($file) {
+            $file->url       = $file->getUrl();
+            $file->thumbnail = $file->getUrl('thumb');
+        }
+
+        return $file;
     }
 
     public function getEmailVerifiedAtAttribute($value)

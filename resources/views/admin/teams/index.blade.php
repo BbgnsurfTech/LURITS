@@ -6,6 +6,10 @@
             <a class="btn btn-success" href="{{ route("admin.teams.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.team.title_singular') }}
             </a>
+            <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
+                {{ trans('global.app_csvImport') }}
+            </button>
+            @include('csvImport.modal', ['model' => 'Team', 'route' => 'admin.teams.parseCsvImport'])
         </div>
     </div>
 @endcan
@@ -22,10 +26,22 @@
 
                     </th>
                     <th>
-                        {{ trans('cruds.team.fields.id') }}
+                        {{ trans('cruds.team.fields.name') }}
                     </th>
                     <th>
-                        {{ trans('cruds.team.fields.name') }}
+                        {{ trans('cruds.team.fields.pseudo_code') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.team.fields.nemis_code') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.team.fields.school_community') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.team.fields.village_town') }}
+                    </th>
+                    <th>
+                        {{ trans('cruds.team.fields.code_type_sector') }}
                     </th>
                     <th>
                         &nbsp;
@@ -83,8 +99,12 @@
     ajax: "{{ route('admin.teams.index') }}",
     columns: [
       { data: 'placeholder', name: 'placeholder' },
-{ data: 'id', name: 'id' },
 { data: 'name', name: 'name' },
+{ data: 'pseudo_code', name: 'pseudo_code' },
+{ data: 'nemis_code', name: 'nemis_code' },
+{ data: 'school_community', name: 'school_community' },
+{ data: 'village_town', name: 'village_town' },
+{ data: 'code_type_sector', name: 'code_type_sector' },
 { data: 'actions', name: '{{ trans('global.actions') }}' }
     ],
     order: [[ 1, 'desc' ]],

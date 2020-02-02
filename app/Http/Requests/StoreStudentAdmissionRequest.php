@@ -19,9 +19,41 @@ class StoreStudentAdmissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'child_name' => [
+            'child_name'      => [
                 'min:2',
                 'max:50',
+                'required',
+            ],
+            'middle_name'     => [
+                'min:2',
+                'max:20',
+            ],
+            'last_name'       => [
+                'min:2',
+                'max:50',
+                'required',
+            ],
+            'admission'       => [
+                'required',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
+            'gender'          => [
+                'required',
+            ],
+            'state_origin'    => [
+                'required',
+            ],
+            'nationality_1'   => [
+                'required',
+            ],
+            'hubby'           => [
+                'min:2',
+                'max:100',
+            ],
+            'student_picture' => [
+                'required',
             ],
         ];
     }

@@ -22,10 +22,22 @@
 
                             </th>
                             <th>
-                                {{ trans('cruds.team.fields.id') }}
+                                {{ trans('cruds.team.fields.name') }}
                             </th>
                             <th>
-                                {{ trans('cruds.team.fields.name') }}
+                                {{ trans('cruds.team.fields.pseudo_code') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.team.fields.nemis_code') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.team.fields.school_community') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.team.fields.village_town') }}
+                            </th>
+                            <th>
+                                {{ trans('cruds.team.fields.code_type_sector') }}
                             </th>
                             <th>
                                 &nbsp;
@@ -39,10 +51,22 @@
 
                                 </td>
                                 <td>
-                                    {{ $team->id ?? '' }}
+                                    {{ $team->name ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $team->name ?? '' }}
+                                    {{ $team->pseudo_code ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $team->nemis_code ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $team->school_community ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $team->village_town ?? '' }}
+                                </td>
+                                <td>
+                                    {{ App\Team::CODE_TYPE_SECTOR_SELECT[$team->code_type_sector] ?? '' }}
                                 </td>
                                 <td>
                                     @can('team_show')

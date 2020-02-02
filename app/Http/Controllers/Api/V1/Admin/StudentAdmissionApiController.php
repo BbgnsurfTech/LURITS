@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\StoreStudentAdmissionRequest;
 use App\Http\Requests\UpdateStudentAdmissionRequest;
 use App\Http\Resources\Admin\StudentAdmissionResource;
@@ -13,11 +14,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StudentAdmissionApiController extends Controller
 {
+    use MediaUploadingTrait;
+
     public function index()
     {
         abort_if(Gate::denies('student_admission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new StudentAdmissionResource(StudentAdmission::all());
+        return new StudentAdmissionResource(StudentAdmission::with(['school_enrolled', 'parent_guardian', 'team'])->get());
     }
 
     public function store(StoreStudentAdmissionRequest $request)
@@ -33,7 +36,7 @@ class StudentAdmissionApiController extends Controller
     {
         abort_if(Gate::denies('student_admission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new StudentAdmissionResource($studentAdmission);
+        return new StudentAdmissionResource($studentAdmission->load(['school_enrolled', 'parent_guardian', 'team']));
     }
 
     public function update(UpdateStudentAdmissionRequest $request, StudentAdmission $studentAdmission)

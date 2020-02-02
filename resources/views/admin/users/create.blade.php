@@ -18,12 +18,37 @@
                 <span class="help-block">{{ trans('cruds.user.fields.name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="middle_name">{{ trans('cruds.user.fields.middle_name') }}</label>
+                <input class="form-control {{ $errors->has('middle_name') ? 'is-invalid' : '' }}" type="text" name="middle_name" id="middle_name" value="{{ old('middle_name', '') }}">
+                @if($errors->has('middle_name'))
+                    <span class="text-danger">{{ $errors->first('middle_name') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.middle_name_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label class="required" for="last_name">{{ trans('cruds.user.fields.last_name') }}</label>
+                <input class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}" type="text" name="last_name" id="last_name" value="{{ old('last_name', '') }}" required>
+                @if($errors->has('last_name'))
+                    <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.last_name_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <label class="required" for="email">{{ trans('cruds.user.fields.email') }}</label>
                 <input class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" type="text" name="email" id="email" value="{{ old('email') }}" required>
                 @if($errors->has('email'))
                     <span class="text-danger">{{ $errors->first('email') }}</span>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.email_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="profile_img">{{ trans('cruds.user.fields.profile_img') }}</label>
+                <div class="needsclick dropzone {{ $errors->has('profile_img') ? 'is-invalid' : '' }}" id="profile_img-dropzone">
+                </div>
+                @if($errors->has('profile_img'))
+                    <span class="text-danger">{{ $errors->first('profile_img') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.user.fields.profile_img_helper') }}</span>
             </div>
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
@@ -72,4 +97,61 @@
 
 
 
+@endsection
+
+@section('scripts')
+<script>
+    Dropzone.options.profileImgDropzone = {
+    url: '{{ route('admin.users.storeMedia') }}',
+    maxFilesize: 2, // MB
+    acceptedFiles: '.jpeg,.jpg,.png,.gif',
+    maxFiles: 1,
+    addRemoveLinks: true,
+    headers: {
+      'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    },
+    params: {
+      size: 2,
+      width: 4096,
+      height: 4096
+    },
+    success: function (file, response) {
+      $('form').find('input[name="profile_img"]').remove()
+      $('form').append('<input type="hidden" name="profile_img" value="' + response.name + '">')
+    },
+    removedfile: function (file) {
+      file.previewElement.remove()
+      if (file.status !== 'error') {
+        $('form').find('input[name="profile_img"]').remove()
+        this.options.maxFiles = this.options.maxFiles + 1
+      }
+    },
+    init: function () {
+@if(isset($user) && $user->profile_img)
+      var file = {!! json_encode($user->profile_img) !!}
+          this.options.addedfile.call(this, file)
+      this.options.thumbnail.call(this, file, '{{ $user->profile_img->getUrl('thumb') }}')
+      file.previewElement.classList.add('dz-complete')
+      $('form').append('<input type="hidden" name="profile_img" value="' + file.file_name + '">')
+      this.options.maxFiles = this.options.maxFiles - 1
+@endif
+    },
+    error: function (file, response) {
+        if ($.type(response) === 'string') {
+            var message = response //dropzone sends it's own error messages in string
+        } else {
+            var message = response.errors.file
+        }
+        file.previewElement.classList.add('dz-error')
+        _ref = file.previewElement.querySelectorAll('[data-dz-errormessage]')
+        _results = []
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            node = _ref[_i]
+            _results.push(node.textContent = message)
+        }
+
+        return _results
+    }
+}
+</script>
 @endsection

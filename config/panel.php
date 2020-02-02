@@ -7,5 +7,9 @@ return [
     'available_languages' => [
         'en' => 'English',
         'fr' => 'French',
+        'pt' => 'Portuguese',
+        'es' => 'Spanish',
+        'ar' => 'Arabic',
+        'hi' => 'Hindi',
     ],
 ];
