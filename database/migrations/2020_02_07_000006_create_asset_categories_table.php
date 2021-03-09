@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateAssetCategoriesTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('asset_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->nullable();
+            $table->foreign('team_id', 'team_fk_878263')->references('id')->on('teams');
+            $table->unsignedInteger('team_id');
+            $table->unsignedBigInteger('term_id');
+            $table->foreign('term_id')->references('id')->on('ds_term');
+            $table->unsignedBigInteger('session_id');
+            $table->foreign('session_id')->references('id')->on('ds_year_session');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+}
