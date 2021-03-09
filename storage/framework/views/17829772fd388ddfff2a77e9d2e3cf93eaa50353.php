@@ -330,7 +330,7 @@
                         <select class="form-control <?php echo e($errors->has('area_of_specialization') ? 'is-invalid' : ''); ?>" name="area_of_specialization" id="area_of_specialization">
                             <option value=""><?php echo e(trans('global.pleaseSelect')); ?></option>
                             <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($subject->id); ?>" <?php echo e(old('area_of_specialization') == $subject->id ? 'selected' : ''); ?>><?php echo e($subject->ds_subject_title); ?></option>
+                                <option value="<?php echo e($subject->id); ?>" <?php echo e(old('area_of_specialization') == $subject->id ? 'selected' : ''); ?>><?php echo e($subject->ds_subject_name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                         <?php if($errors->has('')): ?>
@@ -349,7 +349,7 @@
                         <select class="form-control <?php echo e($errors->has('subject_of_qualification') ? 'is-invalid' : ''); ?>" name="subject_of_qualification" id="subject_of_qualification">
                             <option value=""><?php echo e(trans('global.pleaseSelect')); ?></option>
                             <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($subject->id); ?>" <?php echo e(old('subject_of_qualification') == $subject->id ? 'selected' : ''); ?>><?php echo e($subject->ds_subject_title); ?></option>
+                                <option value="<?php echo e($subject->id); ?>" <?php echo e(old('subject_of_qualification') == $subject->id ? 'selected' : ''); ?>><?php echo e($subject->ds_subject_name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                         <?php if($errors->has('')): ?>
@@ -368,7 +368,7 @@
                         <select class="form-control <?php echo e($errors->has('subject_taught') ? 'is-invalid' : ''); ?>" name="subject_taught" id="subject_taught">
                             <option value=""><?php echo e(trans('global.pleaseSelect')); ?></option>
                             <?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <option value="<?php echo e($subject->id); ?>" <?php echo e(old('subject_taught') == $subject->id ? 'selected' : ''); ?>><?php echo e($subject->ds_subject_title); ?></option>
+                                <option value="<?php echo e($subject->id); ?>" <?php echo e(old('subject_taught') == $subject->id ? 'selected' : ''); ?>><?php echo e($subject->ds_subject_name); ?></option>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                         <?php if($errors->has('')): ?>
@@ -407,24 +407,6 @@
 <?php $__env->startSection('scripts'); ?>
 <script src="<?php echo e(asset('js/filter.js')); ?>"></script>
 <script type="text/javascript">
-   $(document).ready(function() {
-        var age = "";
-        $('#date_of_birth').datepicker({
-            onSelect: function(value, ui) {
-                var today = new Date();
-                age = today.getFullYear() - ui.getFullYear();
-                // $('#age').val(age);
-                if (age<18){
-                 alert(age)   
-                } else{
-                    console.log(age)
-                }
-                
-            },
-            changeMonth: true,
-            changeYear: true
-        })
-    });
     $(document).ready(function(){
         $('select[name="school"]').on('change', function(){
              var school = $(this).val();
@@ -556,7 +538,6 @@
              }
         });
     });
-
 </script>
 <script>
     Dropzone.options.staffPictureDropzone = {

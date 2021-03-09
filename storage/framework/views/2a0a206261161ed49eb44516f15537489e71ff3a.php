@@ -61,7 +61,7 @@
                 <h6>Year of Posting to School: <?php echo e($staff->year_posting_to_school ?? ''); ?></h6>
             </div>
             <div class="col-md-6">
-                <h6>Grade Level/Step: <?php echo e($staff->grade_step ?? ''); ?></h6>
+                <h6>Grade Level/Step: <?php echo e($staff->grade_level ?? ''); ?>/<?php echo e($staff->grade_step ?? ''); ?></h6>
                 <h6>Source of Salary: <?php echo e($staff->salary_source->title ?? ''); ?></h6>
                 <h6>Present Status: <?php echo e($staff->present_status->title ?? ''); ?></h6>
                 <h6>Academic Qualification: <?php echo e($staff->academic_qualification->title ?? ''); ?></h6>

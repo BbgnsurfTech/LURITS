@@ -60,7 +60,7 @@
                 <h6>Year of Posting to School: {{ $staff->year_posting_to_school ?? ''}}</h6>
             </div>
             <div class="col-md-6">
-                <h6>Grade Level/Step: {{ $staff->grade_step ?? '' }}</h6>
+                <h6>Grade Level/Step: {{ $staff->grade_level ?? '' }}/{{ $staff->grade_step ?? '' }}</h6>
                 <h6>Source of Salary: {{ $staff->salary_source->title ?? '' }}</h6>
                 <h6>Present Status: {{ $staff->present_status->title ?? '' }}</h6>
                 <h6>Academic Qualification: {{ $staff->academic_qualification->title ?? '' }}</h6>
