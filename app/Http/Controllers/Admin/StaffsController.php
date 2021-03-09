@@ -280,9 +280,10 @@ class StaffsController extends Controller
 
         $aa = Staff::where('school_id', $staff_school)->where('type_staff_id', $request->type_of_staff)->get();
         foreach ($aa as $staff) {
-            if ($staff->type_staff_id == 1 || $staff->type_staff_id == 2 || $staff->type_staff_id == 7) {
-                    session()->flash('error', 'The selected type of staff already exist for this school.');
-                    return redirect()->back();
+            if ($staff->type_staff_id == 1 || $staff->type_staff_id == 2 || $staff->type_staff_id == 7 || $staff->type_staff_id == 8) {
+                    $request->validate([
+                'type_staff_id' => "required",['type_staff_id-required' => "my mesage"]
+            ]);
                 }    
         }
 
@@ -510,7 +511,7 @@ class StaffsController extends Controller
         abort_if(Gate::denies('staff_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $staff->load('school');
-        $subjects = DsSubject::all()->pluck('ds_subject_name', 'id');
+        $subjects = DsSubject::all()->pluck('ds_subject_title', 'id');
         $genders = DsGender::all()->pluck('title', 'id');
         $schools = School::all();
         $present_status = DsPresentStatus::all()->pluck('title', 'id');

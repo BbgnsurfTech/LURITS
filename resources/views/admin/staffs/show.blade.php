@@ -76,9 +76,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h6>Teaching Qualification: {{ $staff->teaching_qualification->title ?? '' }}</h6>
-                <h6>Area of Specialization: {{ $staff->area_of_specialization->ds_subject_name ?? '' }}</h6>
-                <h6>Subject of Qualification: {{ $staff->subject_of_qualification->ds_subject_name ?? '' }}</h6>
-                <h6>Main Subject Taught: {{ $staff->subject_taught->ds_subject_name ?? '' }}</h6>
+                <h6>Area of Specialization: {{ $staff->area_of_specialization->ds_subject_title ?? '' }}</h6>
+                <h6>Subject of Qualification: {{ $staff->subject_of_qualification->ds_subject_title ?? '' }}</h6>
+                <h6>Main Subject Taught: {{ $staff->subject_taught->ds_subject_title ?? '' }}</h6>
                 <h6>Seminar/Workshop: {{ $staff->seminar_workshop->title ?? "No" }}</h6>
             </div>
         </div>

@@ -77,9 +77,9 @@
         <div class="row">
             <div class="col-md-12">
                 <h6>Teaching Qualification: <?php echo e($staff->teaching_qualification->title ?? ''); ?></h6>
-                <h6>Area of Specialization: <?php echo e($staff->area_of_specialization->ds_subject_name ?? ''); ?></h6>
-                <h6>Subject of Qualification: <?php echo e($staff->subject_of_qualification->ds_subject_name ?? ''); ?></h6>
-                <h6>Main Subject Taught: <?php echo e($staff->subject_taught->ds_subject_name ?? ''); ?></h6>
+                <h6>Area of Specialization: <?php echo e($staff->area_of_specialization->ds_subject_tile ?? ''); ?></h6>
+                <h6>Subject of Qualification: <?php echo e($staff->subject_of_qualification->ds_subject_tile ?? ''); ?></h6>
+                <h6>Main Subject Taught: <?php echo e($staff->subject_taught->ds_subject_tile ?? ''); ?></h6>
                 <h6>Seminar/Workshop: <?php echo e($staff->seminar_workshop->title ?? "No"); ?></h6>
             </div>
         </div>

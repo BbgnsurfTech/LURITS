@@ -331,7 +331,7 @@
                         <select class="form-control {{ $errors->has('area_of_specialization') ? 'is-invalid' : '' }}" name="area_of_specialization" id="area_of_specialization">
                             <option value="">{{ trans('global.pleaseSelect') }}</option>
                             @foreach($subjects as $subject)
-                                <option value="{{ $subject->id }}" {{ old('area_of_specialization') == $subject->id ? 'selected' : '' }}>{{ $subject->ds_subject_name }}</option>
+                                <option value="{{ $subject->id }}" {{ old('area_of_specialization') == $subject->id ? 'selected' : '' }}>{{ $subject->ds_subject_title }}</option>
                             @endforeach
                         </select>
                         @if($errors->has(''))
@@ -350,7 +350,7 @@
                         <select class="form-control {{ $errors->has('subject_of_qualification') ? 'is-invalid' : '' }}" name="subject_of_qualification" id="subject_of_qualification">
                             <option value="">{{ trans('global.pleaseSelect') }}</option>
                             @foreach($subjects as $subject)
-                                <option value="{{ $subject->id }}" {{ old('subject_of_qualification') == $subject->id ? 'selected' : '' }}>{{ $subject->ds_subject_name }}</option>
+                                <option value="{{ $subject->id }}" {{ old('subject_of_qualification') == $subject->id ? 'selected' : '' }}>{{ $subject->ds_subject_title }}</option>
                             @endforeach
                         </select>
                         @if($errors->has(''))
@@ -369,7 +369,7 @@
                         <select class="form-control {{ $errors->has('subject_taught') ? 'is-invalid' : '' }}" name="subject_taught" id="subject_taught">
                             <option value="">{{ trans('global.pleaseSelect') }}</option>
                             @foreach($subjects as $subject)
-                                <option value="{{ $subject->id }}" {{ old('subject_taught') == $subject->id ? 'selected' : '' }}>{{ $subject->ds_subject_name }}</option>
+                                <option value="{{ $subject->id }}" {{ old('subject_taught') == $subject->id ? 'selected' : '' }}>{{ $subject->ds_subject_title }}</option>
                             @endforeach
                         </select>
                         @if($errors->has(''))
